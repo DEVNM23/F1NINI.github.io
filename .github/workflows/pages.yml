@@ -1,0 +1,45 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'yarn'
+
+      - name: Install dependencies (dash)
+        working-directory: dash
+        run: |
+          corepack enable
+          yarn install --immutable
+
+      - name: Build and export (dash)
+        working-directory: dash
+        run: |
+          yarn build
+          # Try the yarn-export script if present, otherwise run next export
+          if yarn -s next -v >/dev/null 2>&1; then
+            yarn next export -o out || npx next export -o out
+          else
+            npx next build && npx next export -o out
+          fi
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: dash/out
