@@ -1,4 +1,4 @@
-import { connection } from "next/server";
+// Removed use of `connection` to allow static export builds
 import { utc } from "moment";
 
 import Countdown from "@/components/schedule/Countdown";
@@ -8,11 +8,10 @@ import { env } from "@/env";
 import type { Round as RoundType } from "@/types/schedule.type";
 
 export const getNext = async () => {
-	await connection();
 
 	try {
 		const nextReq = await fetch(`${env.API_URL}/api/schedule/next`, {
-			cache: "no-store",
+			cache: "force-cache",
 		});
 		const next: RoundType = await nextReq.json();
 

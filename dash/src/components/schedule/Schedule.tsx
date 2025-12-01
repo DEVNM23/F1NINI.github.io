@@ -1,4 +1,4 @@
-import { connection } from "next/server";
+// Removed use of `connection` to allow static export builds
 
 import Round from "@/components/schedule/Round";
 
@@ -7,11 +7,11 @@ import type { Round as RoundType } from "@/types/schedule.type";
 import { env } from "@/env";
 
 export const getSchedule = async () => {
-	await connection();
+	// Intentionally not awaiting `connection()` so this can run at build time
 
 	try {
 		const scheduleReq = await fetch(`${env.API_URL}/api/schedule`, {
-			cache: "no-store",
+			cache: "force-cache",
 		});
 		const schedule: RoundType[] = await scheduleReq.json();
 
