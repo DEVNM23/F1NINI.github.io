@@ -7,6 +7,12 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env:
+      # Set default envs for building the frontend. For production, prefer storing values in repository secrets
+      NODE_ENV: production
+      API_URL: ${{ secrets.API_URL || 'https://example.com/api' }}
+      NEXT_PUBLIC_LIVE_URL: ${{ secrets.NEXT_PUBLIC_LIVE_URL || 'https://example.com' }}
+      NEXT_BUILD_OUTPUT: export
     permissions:
       contents: read
       pages: write
@@ -28,21 +34,19 @@ jobs:
           corepack enable
           yarn install --immutable
 
-      - name: Build and export (dash)
+      - name: Build (dash) and write static export
         working-directory: dash
         run: |
-          yarn build
-          # Try the yarn-export script if present, otherwise run next export
-          if yarn -s next -v >/dev/null 2>&1; then
-            yarn next export -o out || npx next export -o out
-          else
-            npx next build && npx next export -o out
-          fi
+          # Use Next 15 export build: set NEXT_BUILD_OUTPUT=export
+          NEXT_BUILD_OUTPUT=export API_URL="$API_URL" NEXT_PUBLIC_LIVE_URL="$NEXT_PUBLIC_LIVE_URL" yarn build
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v1
         with:
           path: dash/out
+      - name: Remove potential CNAME in export (avoid custom domain)
+        run: |
+          if [ -f "dash/out/CNAME" ]; then rm -f dash/out/CNAME; fi
 
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v1
