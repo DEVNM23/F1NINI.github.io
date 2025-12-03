@@ -2,9 +2,8 @@ name: Build and Deploy Pages
 
 on:
   push:
-    branches:
-      - main
-  workflow_dispatch: {}
+    branches: [ main ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -12,9 +11,10 @@ permissions:
   id-token: write
 
 jobs:
-  build_and_deploy:
+  build:
+    name: Build and upload artifact
     runs-on: ubuntu-latest
-    name: Build dash and deploy to Pages
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -30,84 +30,37 @@ jobs:
           corepack prepare yarn@stable --activate
 
       - name: Install dependencies (dash)
+        working-directory: dash
         run: |
-          cd dash
           yarn install --immutable --check-cache || yarn install
 
       - name: Build and export static site
         env:
           API_URL: ${{ secrets.API_URL }}
           NEXT_PUBLIC_LIVE_URL: ${{ secrets.NEXT_PUBLIC_LIVE_URL }}
+        working-directory: dash
         run: |
-          cd dash
-          # allow optional secrets; fall back to sensible defaults
           export API_URL=${API_URL:-http://localhost:4001}
           export NEXT_PUBLIC_LIVE_URL=${NEXT_PUBLIC_LIVE_URL:-https://devnm23.github.io}
-          yarn build
+          NEXT_BUILD_OUTPUT=export yarn build
           npx next export -o out
 
+      - name: Remove CNAME if present
+        run: |
+          if [ -f "dash/out/CNAME" ]; then rm -f dash/out/CNAME; fi
+
       - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dash/out
 
   deploy:
-    needs: build_and_deploy
+    name: Deploy to GitHub Pages
+    needs: build
     runs-on: ubuntu-latest
     environment: github-pages
-    steps:
-      - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
-name: Deploy to GitHub Pages
-
-on:
-  push:
-    branches: [ main ]
-
-jobs:
-  build-and-deploy:
-    runs-on: ubuntu-latest
-    env:
-      # Set default envs for building the frontend. For production, prefer storing values in repository secrets
-      NODE_ENV: production
-      API_URL: ${{ secrets.API_URL || 'https://example.com/api' }}
-      NEXT_PUBLIC_LIVE_URL: ${{ secrets.NEXT_PUBLIC_LIVE_URL || 'https://example.com' }}
-      NEXT_BUILD_OUTPUT: export
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-          cache: 'yarn'
-
-      - name: Install dependencies (dash)
-        working-directory: dash
-        run: |
-          corepack enable
-          yarn install --immutable
-
-      - name: Build (dash) and write static export
-        working-directory: dash
-        run: |
-          # Use Next 15 export build: set NEXT_BUILD_OUTPUT=export
-          NEXT_BUILD_OUTPUT=export API_URL="$API_URL" NEXT_PUBLIC_LIVE_URL="$NEXT_PUBLIC_LIVE_URL" yarn build
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v1
-        with:
-          path: dash/out
-      - name: Remove potential CNAME in export (avoid custom domain)
-        run: |
-          if [ -f "dash/out/CNAME" ]; then rm -f dash/out/CNAME; fi
-
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
 
