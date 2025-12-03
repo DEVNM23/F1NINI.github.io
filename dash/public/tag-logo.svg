@@ -1,31 +1,52 @@
 <svg width="518" height="196" viewBox="0 0 518 196" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Main background with gradient effect -->
   <defs>
+    <!-- Gradient definitions -->
     <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#5b7cfa;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#4c63d2;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#4f46e5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
     </linearGradient>
+    
+    <linearGradient id="pillGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f3f4f6;stop-opacity:1" />
+    </linearGradient>
+    
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-opacity="0.15"/>
+    </filter>
   </defs>
   
-  <!-- Background container -->
+  <!-- Main background container -->
   <rect width="518" height="196" rx="50" fill="url(#bgGradient)"/>
   
-  <!-- Main logo group - pill shaped container -->
-  <g>
-    <!-- Left side - white "f1" pill -->
-    <rect x="80" y="50" width="130" height="96" rx="24" fill="white"/>
+  <!-- Decorative circles in background -->
+  <circle cx="50" cy="40" r="8" fill="white" opacity="0.08"/>
+  <circle cx="480" cy="170" r="12" fill="white" opacity="0.06"/>
+  <circle cx="30" cy="160" r="5" fill="white" opacity="0.04"/>
+  
+  <!-- Main logo container -->
+  <g filter="url(#shadow)">
+    <!-- "nini" label at top left -->
+    <text x="72" y="48" font-family="'Segoe UI', Arial, sans-serif" font-size="13" font-weight="700" fill="white" letter-spacing="3" opacity="0.85">
+      NINI
+    </text>
     
-    <!-- "f1" text -->
-    <text x="145" y="107" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="900" fill="#5b7cfa" text-anchor="middle">
+    <!-- Left pill - "f1" -->
+    <rect x="52" y="62" width="120" height="94" rx="28" fill="url(#pillGradient)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <text x="112" y="120" font-family="'Arial Black', sans-serif" font-size="58" font-weight="900" fill="#4f46e5" text-anchor="middle" letter-spacing="-2">
       f1
     </text>
     
-    <!-- Right side - white "dash" pill -->
-    <rect x="228" y="50" width="160" height="96" rx="24" fill="white"/>
+    <!-- Divider dot -->
+    <circle cx="195" cy="109" r="5" fill="white" opacity="0.3"/>
     
-    <!-- "dash" text -->
-    <text x="308" y="107" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700" fill="#5b7cfa" text-anchor="middle">
+    <!-- Right pill - "dash" -->
+    <rect x="212" y="62" width="244" height="94" rx="28" fill="url(#pillGradient)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+    <text x="334" y="120" font-family="'Arial', sans-serif" font-size="52" font-weight="700" fill="#3b82f6" text-anchor="middle" letter-spacing="-0.5">
       dash
     </text>
   </g>
+  
+  <!-- Accent line at bottom -->
+  <rect x="52" y="172" width="404" height="2" rx="1" fill="white" opacity="0.2"/>
 </svg>
