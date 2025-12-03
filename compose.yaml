@@ -1,6 +1,6 @@
 services:
   live:
-    image: ghcr.io/slowlydev/f1-dash-live:latest
+    image: ghcr.io/DevNM/f1-dash-live:latest
     build:
       context: .
       target: live
@@ -13,7 +13,7 @@ services:
       - RUST_LOG=live=debug,client=debug
 
   api:
-    image: ghcr.io/slowlydev/f1-dash-api:latest
+    image: ghcr.io/DevNM/f1-dash-api:latest
     build:
       context: .
       target: api
@@ -26,7 +26,7 @@ services:
       - RUST_LOG=api=debug
 
   frontend:
-    image: ghcr.io/slowlydev/f1-dash:latest
+    image: ghcr.io/DevNM/f1-dash:latest
     build:
       context: ./dash/
     restart: unless-stopped
@@ -50,7 +50,7 @@ services:
       - POSTGRES_PASSWORD=password
 
   importer:
-    image: ghcr.io/slowlydev/f1-dash-importer:latest
+    image: ghcr.io/DevNM/f1-dash-importer:latest
     build:
       context: .
       target: importer
@@ -58,7 +58,7 @@ services:
       - DATABASE_URL=postgres://postgres:password@timescaledb:5432/postgres
 
   analytics:
-    image: ghcr.io/slowlydev/f1-dash-analytics:latest
+    image: ghcr.io/DevNM/f1-dash-analytics:latest
     build:
       context: .
       target: analytics

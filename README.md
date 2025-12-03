@@ -17,7 +17,7 @@ I really appreciate your interest in contributing to this project. I recommend c
 
 ## Supporting
 
-If you'd like to support this project and help me dedicate more time to it, you can [buy me a coffee](https://www.buymeacoffee.com/slowlydev).
+If you'd like to support this project and help me dedicate more time to it, you can [buy me a coffee](https://www.buymeacoffee.com/DevNM).
 
 ## Notice
 

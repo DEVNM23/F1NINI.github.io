@@ -38,14 +38,14 @@ export default function Layout({ children }: Props) {
 					<div className="flex items-center gap-3">
 						<Link
 							className="btn-ghost hidden sm:inline-flex"
-							href="https://www.buymeacoffee.com/slowlydev"
+							href="https://www.buymeacoffee.com/DevNM"
 							target="_blank"
 						>
 							<Image src={coffeeIcon} alt="Buy Me A Coffee" width={18} height={18} />
 							<span className="text-xs">Coffee</span>
 						</Link>
 
-						<Link className="btn hidden sm:inline-flex" href="https://github.com/slowlydev/f1-dash" target="_blank">
+						<Link className="btn hidden sm:inline-flex" href="https://github.com/DevNM/f1-dash" target="_blank">
 							<Image src={githubIcon} alt="GitHub" width={18} height={18} />
 							<span className="text-xs">GitHub</span>
 						</Link>

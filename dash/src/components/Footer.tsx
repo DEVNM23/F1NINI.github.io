@@ -9,11 +9,11 @@ export default function Footer() {
 				</p>
 
 				<p>
-					<TextLink website="https://www.buymeacoffee.com/slowlydev">Buy me a coffee</TextLink> to support me.
+					<TextLink website="https://www.buymeacoffee.com/DevNM">Buy me a coffee</TextLink> to support me.
 				</p>
 
 				<p>
-					Contribute on <TextLink website="https://github.com/slowlydev/f1-dash">GitHub</TextLink>.
+					Contribute on <TextLink website="https://github.com/DevNM/f1-dash">GitHub</TextLink>.
 				</p>
 
 				<p>

@@ -16,7 +16,7 @@ To get started with the frontend do the following:
 
 ```bash
 # Clone the repository or your fork
-git clone git@github.com:slowlydev/f1-dash.git
+git clone git@github.com:DevNM/f1-dash.git
 
 # Go to the frontend
 cd dash/
@@ -68,7 +68,7 @@ cd f1-dash/
 cargo r -p simulator year-circuit.data.txt
 ```
 
-You can find existing telemetry recordings [here](https://github.com/slowlydev/f1-dash-data-parser/releases/tag/data). If you want to record your own new sessions, here is how:
+You can find existing telemetry recordings [here](https://github.com/DevNM/f1-dash-data-parser/releases/tag/data). If you want to record your own new sessions, here is how:
 
 ```bash
 cd f1-dash/

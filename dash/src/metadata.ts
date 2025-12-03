@@ -31,10 +31,10 @@ export const metadata: Metadata = {
 	},
 
 	twitter: {
-		site: "@Slowlydev",
+		site: "@DevNM",
 		title,
 		description,
-		creator: "@Slowlydev",
+		creator: "@DevNM",
 		card: "summary_large_image",
 		images: [
 			{
@@ -52,9 +52,9 @@ export const metadata: Metadata = {
 
 	keywords: ["Formula 1", "f1 dashboard", "realtime telemetry", "f1 timing", "live updates"],
 
-	creator: "Slowlydev",
-	publisher: "Slowlydev",
-	authors: [{ name: "Slowlydev", url: "https://slowly.dev" }],
+	creator: "DevNM",
+	publisher: "DevNM",
+	authors: [{ name: "DevNM", url: "https://slowly.dev" }],
 
 	appleWebApp: {
 		capable: true,
