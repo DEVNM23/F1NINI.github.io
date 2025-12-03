@@ -1,51 +1,31 @@
 <svg width="518" height="196" viewBox="0 0 518 196" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
-  <rect width="518" height="196" rx="50" fill="#1f2937"/>
+  <!-- Main background with gradient effect -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5b7cfa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#4c63d2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
   
-  <!-- Accent bar on left -->
-  <rect width="8" height="196" rx="50" fill="#3b82f6"/>
+  <!-- Background container -->
+  <rect width="518" height="196" rx="50" fill="url(#bgGradient)"/>
   
-  <!-- Main content group -->
+  <!-- Main logo group - pill shaped container -->
   <g>
-    <!-- "nini" text - smaller, uppercase, cyan -->
-    <text x="35" y="55" font-family="Arial, sans-serif" font-size="18" font-weight="700" fill="#06b6d4" letter-spacing="2">
-      NINI
-    </text>
+    <!-- Left side - white "f1" pill -->
+    <rect x="80" y="50" width="130" height="96" rx="24" fill="white"/>
     
-    <!-- F1 badge -->
-    <rect x="35" y="65" width="45" height="45" rx="8" fill="#ef4444"/>
-    <text x="57.5" y="95" font-family="Arial, sans-serif" font-size="28" font-weight="900" fill="white" text-anchor="middle">
-      F1
-    </text>
-    
-    <!-- "DASH" text - below F1 badge -->
-    <text x="35" y="135" font-family="Arial, sans-serif" font-size="16" font-weight="700" fill="#ffffff" letter-spacing="1.5">
-      DASH
-    </text>
-    
-    <!-- Divider line -->
-    <line x1="105" y1="40" x2="105" y2="160" stroke="#3b82f6" stroke-width="2" opacity="0.3"/>
-    
-    <!-- Right section: "f1-dash" full text branding -->
-    <text x="125" y="85" font-family="Arial, sans-serif" font-size="32" font-weight="800" fill="#3b82f6">
+    <!-- "f1" text -->
+    <text x="145" y="107" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="900" fill="#5b7cfa" text-anchor="middle">
       f1
     </text>
-    <text x="158" y="85" font-family="Arial, sans-serif" font-size="32" font-weight="800" fill="#ffffff">
-      -
-    </text>
-    <text x="175" y="85" font-family="Arial, sans-serif" font-size="32" font-weight="800" fill="#06b6d4">
+    
+    <!-- Right side - white "dash" pill -->
+    <rect x="228" y="50" width="160" height="96" rx="24" fill="white"/>
+    
+    <!-- "dash" text -->
+    <text x="308" y="107" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="700" fill="#5b7cfa" text-anchor="middle">
       dash
     </text>
-    
-    <!-- Subtitle -->
-    <text x="125" y="110" font-family="Arial, sans-serif" font-size="11" font-weight="500" fill="#9ca3af" letter-spacing="1">
-      LIVE TELEMETRY
-    </text>
-    
-    <!-- Decorative elements -->
-    <circle cx="485" cy="35" r="4" fill="#ef4444" opacity="0.6"/>
-    <circle cx="495" cy="50" r="3" fill="#3b82f6" opacity="0.4"/>
-    <circle cx="475" cy="160" r="3.5" fill="#06b6d4" opacity="0.5"/>
-    <circle cx="505" cy="155" r="2.5" fill="#ef4444" opacity="0.3"/>
   </g>
 </svg>
