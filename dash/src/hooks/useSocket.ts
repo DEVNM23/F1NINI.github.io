@@ -13,20 +13,49 @@ export const useSocket = ({ handleInitial, handleUpdate }: Props) => {
 	const [connected, setConnected] = useState<boolean>(false);
 
 	useEffect(() => {
-		const sse = new EventSource(`${env.NEXT_PUBLIC_LIVE_URL}/api/sse`);
+		// Use the API URL endpoint for SSE
+		const apiUrl = env.NEXT_PUBLIC_LIVE_URL || "https://api.f1-dash.com";
+		const sseUrl = `${apiUrl}/api/sse`;
 
-		sse.onerror = () => setConnected(false);
-		sse.onopen = () => setConnected(true);
+		console.log("🔌 Connecting to SSE endpoint:", sseUrl);
 
-		sse.addEventListener("initial", (message) => {
-			handleInitial(JSON.parse(message.data));
-		});
+		try {
+			const sse = new EventSource(sseUrl, { withCredentials: false });
 
-		sse.addEventListener("update", (message) => {
-			handleUpdate(JSON.parse(message.data));
-		});
+			sse.onerror = (error) => {
+				console.error("❌ SSE connection error:", error);
+				setConnected(false);
+			};
 
-		return () => sse.close();
+			sse.onopen = () => {
+				console.log("✅ SSE connected successfully");
+				setConnected(true);
+			};
+
+			sse.addEventListener("initial", (message) => {
+				try {
+					handleInitial(JSON.parse(message.data));
+				} catch (e) {
+					console.error("Error parsing initial message:", e);
+				}
+			});
+
+			sse.addEventListener("update", (message) => {
+				try {
+					handleUpdate(JSON.parse(message.data));
+				} catch (e) {
+					console.error("Error parsing update message:", e);
+				}
+			});
+
+			return () => {
+				console.log("🔌 Closing SSE connection");
+				sse.close();
+			};
+		} catch (error) {
+			console.error("Failed to create EventSource:", error);
+			setConnected(false);
+		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
